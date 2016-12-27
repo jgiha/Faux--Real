@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "test";
+}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+@section scripts{
+    
+    <script>
+        //$("#listitem").swiperight(function () {
+        //    $.mobile.changePage("#page1");
+        //});
+
+        //$(document).on('swipeleft', '[data-role="page"]', function (event) {
+        //    if (event.handled !== true) // This will prevent event triggering more then once
+        //    {
+        //        var nextpage = $(this).next('[data-role="page"]');
+        //        // swipe using id of next page if exists
+        //        if (nextpage.length > 0) {
+        //            $.mobile.changePage(nextpage, { transition: "slide", reverse: false }, true, true);
+        //        }
+        //        event.handled = true;
+        //    }
+        //    return false;
+        //});
+
+        //$(document).on('swiperight', '[data-role="page"]', function (event) {
+        //    if (event.handled !== true) // This will prevent event triggering more then once
+        //    {
+        //        var prevpage = $(this).prev('[data-role="page"]');
+        //        if (prevpage.length > 0) {
+        //            $.mobile.changePage(prevpage, { transition: "slide", reverse: true }, true, true);
+        //        }
+        //        event.handled = true;
+        //    }
+        //    return false;
+        //});
+
+
+ //$(document).ready(function () {
+ //$("p").on("tap", function () {
+ //alert("Tap event detected!");
+ //});
+
+ //$("p").on("taphold", function () {
+ //alert("Tap hold event detected!");
+ //});
+
+ //$("p").on("swipe", function () {
+ //alert("Swipe event detected!");
+ //});
+
+ //$("p").on("swipeleft", function () {
+ //alert("Swipe left event detected!");
+ //});
+
+ //$("p").on("swiperight", function () {
+ //alert("Swipe right event detected!");
+ //});
+ //});
+
+
+        $('#touch').jqxTouch({
+            orientationChangeEnabled: true
+        });
+        $('#touch').on('swipeleft', function () {
+            $("#log").html("You've swiped left");
+        });
+        $('#touch').on('swiperight', function () {
+            $("#log").html("You've swiped right");
+        });
+        $('#touch').on('tap', function () {
+            $("#log").html("You've Tapped");
+        });
+        $('#touch').on('swipe', function () {
+            $("#log").html("You've swiped");
+        });
+
+
+    </script>
+    }
+}
+<h2>test</h2>
+<body>
+    @*<div data-role="page">
+        <div data-role="header">
+            <div align="center">jQuery Mobile Events</div>
+        </div>
+        <div data-role="content">
+            <p>Introduction to jQuery Mobile Events!</p>
+        </div>
+    </div>*@
+
+
+    <div id='touch'>
+        <div style="height: 300px; color: white; background: blue;">Swipe Left, Swipe Right, Tap or swipe</div>
+    </div>
+    <br />
+    <div id='log'></div>
+
+</body>

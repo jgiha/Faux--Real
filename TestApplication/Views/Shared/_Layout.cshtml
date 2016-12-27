@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/themes/base/jquery-ui")
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/typeahead")
+    @Styles.Render("~/Content/noIdSlider")
+     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/superhero/bootstrap.min.css" rel="stylesheet" integrity="sha384-88w0u/oucDSTE30ETLLIobzhT+bQ6CSsiqQyLZpwHvve89eqUA9F2Db6ST6jGRLx" crossorigin="anonymous">
+   
+
+    <meta name="viewport" content="width=device-width,height=device-height,minimum-scale=1,maximum-scale=1" />
+    <link href="nouislider.min.css" rel="stylesheet">
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*@Url.Content(, new { area = "" }, new { @class = "navbar-brand" })*@
+                <img src="~/Content/images/logo.jpeg" alt="Smiley face" class="navbar-brand">
+                @Html.ActionLink("FAUX|REAL", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            &copy; @DateTime.Now.Year - FAUX|REAL
+            <img src="~/Content/images/logo.jpeg" alt="Smiley face" style="height:40px;" class="center-block">
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquerymobile")
+    @Scripts.Render("~/bundles/jquery-ui")
+    @Scripts.Render("~/bundles/jqwidgets")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/noUiSlider")
+    <script src="nouislider.min.js"></script>
+    @*<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />*@
+   
+    <script type="text/javascript">
+ $(document).bind("mobileinit", function () {
+     // jQuery Mobile's Ajax navigation does not work in all cases (e.g.,
+     // when navigating from a mobile to a non-mobile page), especially when going    back, hence disabling it.
+     $.mobile.ajaxEnabled = false;
+  });
+    </script>
+    @RenderSection("Scripts", required: false)
+
+
+</body>
+</html>

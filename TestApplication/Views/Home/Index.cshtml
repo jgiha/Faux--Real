@@ -1,0 +1,229 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@section styles{
+
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+
+    <style>
+        #container {
+            width: 500px;
+            margin: auto !important;
+            display: block;
+            height: 500px;
+            position: relative;
+            list-style-type: none;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .buddy {
+            display: none;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            color: #fff;
+            padding: 20px;
+            width: 360px;
+            height: 360px;
+            top: 50px;
+            left: 50px;
+            position: absolute;
+            cursor: hand;
+        }
+
+        .rotate-left {
+            transform: rotate(30deg) scale(0.8);
+            transition: 1s;
+            margin-left: 400px;
+            cursor: e-resize;
+            opacity: 0;
+        }
+
+        .rotate-right {
+            transform: rotate(-30deg) scale(0.8);
+            transition: 1s;
+            opacity: 0;
+            margin-left: -400px;
+            cursor: w-resize;
+        }
+
+        .avatar {
+            background: #222;
+            width: 340px;
+            height: 340px;
+            display: block;
+            margin-top: 10px;
+            margin-left: 10px;
+            background-size: 100% auto !important;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .like {
+            border-radius: 5px;
+            padding: 5px 10px;
+            border: 2px solid green;
+            color: green;
+            text-transform: uppercase;
+            font-size: 15px;
+            position: absolute;
+            top: 50px;
+            right: 40px;
+            text-shadow: none;
+        }
+
+        .dislike {
+            border-radius: 5px;
+            padding: 5px 10px;
+            border: 2px solid red;
+            color: red;
+            text-transform: uppercase;
+            font-size: 15px;
+            position: absolute;
+            top: 50px;
+            left: 40px;
+            text-shadow: none;
+        }
+    </style>
+}
+
+@section scripts{
+
+    @*<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>*@
+    <script>
+        //Some jquery swipe code that I tried to implement... unsuccessfully
+        // Could be incompatibility with VS debug environment and Dell touch hardware
+
+        $(document).on('swipeleft', '[data-role="page"]', function (event) {
+            if (event.handled !== true) // This will prevent event triggering more then once
+            {
+                var nextpage = $(this).next('[data-role="page"]');
+                // swipe using id of next page if exists
+                if (nextpage.length > 0) {
+                    $.mobile.changePage(nextpage, { transition: "slide", reverse: false }, true, true);
+                }
+                event.handled = true;
+            }
+            return false;
+        });
+
+        $(document).on('swiperight', '[data-role="page"]', function (event) {
+            if (event.handled !== true) // This will prevent event triggering more then once
+            {
+                var prevpage = $(this).prev('[data-role="page"]');
+                if (prevpage.length > 0) {
+                    $.mobile.changePage(prevpage, { transition: "slide", reverse: true }, true, true);
+                }
+                event.handled = true;
+            }
+            return false;
+        });
+
+        //First bit of code that I tried but couldn't get to work
+
+        //$(document).ready(function () {
+
+        //    $(".buddy").on("swiperight", function () {
+        //        $(this).addClass('rotate-left').delay(700).fadeOut(1);
+        //        $('.buddy').find('.status').remove();
+
+        //        $(this).append('<div class="status like">Like!</div>');
+        //        if ($(this).is(':last-child')) {
+        //            $('.buddy:nth-child(1)').removeClass('rotate-left rotate-right').fadeIn(300);
+        //        } else {
+        //            $(this).next().removeClass('rotate-left rotate-right').fadeIn(400);
+        //        }
+        //    });
+
+        //    $(".buddy").on("swipeleft", function () {
+        //        $(this).addClass('rotate-right').delay(700).fadeOut(1);
+        //        $('.buddy').find('.status').remove();
+        //        $(this).append('<div class="status dislike">Dislike!</div>');
+
+        //        if ($(this).is(':last-child')) {
+        //            $('.buddy:nth-child(1)').removeClass('rotate-left rotate-right').fadeIn(300);
+        //            alert('Na-na!');
+        //        } else {
+        //            $(this).next().removeClass('rotate-left rotate-right').fadeIn(400);
+        //        }
+        //    });
+
+        //});
+
+    </script>
+}
+
+<!--Below: mock hard coded rough draft attempt at User Swipe view (very primitive)-->
+<body>
+    <div>
+        <h1 class="text-center">Paul</h1>
+        <div class="form-group row">
+            <div class="col-xs-offset-3 col-xs-6">
+                <!--Percentage values will come from db-->
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 65%">
+                        <span class="sr-only">35% Complete (success)</span> <img src="http://plainicon.com/dboard/userprod/2800_a1826/prod_thumb/plainicon.com-50128-256px-7a5.png" style="height:12px;" /> Intentions
+                    </div>
+
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 45%">
+                        <span class="sr-only">25% Complete (success)</span> <img src="http://plainicon.com/dboard/userprod/2800_a1826/prod_thumb/plainicon.com-50128-256px-7a5.png" style="height:12px;" /> Reviewed Intentions
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <label class="btn btn-danger">< No</label>
+        <img src="http://media.eremedia.com/uploads/2013/05/15175348/Office-Space-Milton.jpg" />
+        <label class="btn btn-success">Yes ></label>
+    </div>
+
+
+    @* <!--Generic content to test swipe functions--!>
+
+        <div data-role="page" id="article1">
+        <div data-role="header" data-theme="b" data-position="fixed" data-id="footer">
+        </div>*@
+
+    @*<div data-role="content">
+            <p>Article 1</p>
+        </div>*@
+
+    @*</div>*@
+
+    @*<div data-role="page" id="article2">
+            <div data-role="header" data-theme="b" data-position="fixed" data-id="footer">
+                <a href="#article1" data-icon="home" data-iconpos="notext">Home</a>
+                <h1>Articles</h1>
+            </div>
+            <div data-role="content">
+                <p>Article 2</p>
+            </div>
+            <div data-role="footer" data-theme="b" data-position="fixed" data-id="footer">
+                <h1>Footer</h1>
+            </div>
+        </div>
+
+        <div data-role="page" id="article3">
+            <div data-role="header" data-theme="b" data-position="fixed" data-id="footer">
+                <a href="#article1" data-icon="home" data-iconpos="notext">Home</a>
+                <h1>Articles</h1>
+            </div>
+            <div data-role="content">
+                <p>Article 3</p>
+            </div>
+            <div data-role="footer" data-theme="b" data-position="fixed" data-id="footer">
+                <h1>Footer</h1>
+            </div>
+        </div>*@
+
+</body>
